@@ -42,8 +42,9 @@
 // Includes
 #include <string>
 #include <fstream>
+#include <vector>
 
-/* Structures:
+/** Structures:
  *  These structures form a standardized way of interacting with the algorithms
  *  we intend to test.
  */
@@ -51,13 +52,13 @@
 struct Dataset {
   // Dataset's name (its filename)
   std::string name;
-  // The dataset's length
-  int data_length;
   // The data we want to (de)compress, in row-major order
-  char* data;
+  std::vector<char> bytes;
 };
 
 struct Results {
+  // Dataset name
+  std::string dataset_name;
   // Compression stats
   double avg_time_compression;
   double std_deviation_compression;
@@ -66,8 +67,6 @@ struct Results {
   double std_deviation_decompression;
   // Compression ratio achieved
   double compression_ratio;
-  // Number of iterations we've concluded
-  int num_iterations;
   // Were there any errors?
   bool error;	
 };
@@ -75,19 +74,30 @@ struct Results {
 typedef struct Dataset Dataset;
 typedef struct Results Results;
 
-/* Functions
+/** Functions
  *  These declarations are defined in their respective cpps, and are here for
  *  reference.
+ *  This implementation is able to be extended by creating more ***Test-type
+ *  functions.
  */
 // This function loads a dataset from a given filename.
 // The file must be a text file in which values are separated by spaces
 // and lines by a line break.
 // The file is read line-by-line and each "word" is attributed to a "cell".
+// The dataset must already be allocated.
 bool LoadDataset(std::string filename, Dataset * dataset);
+
+// This function fills in the average and standard deviation of the compression
+// and decompression times. Saves us from repeating a lot of code.
+// results must, of course, already be allocated. If all goes well, after
+// calling this, results will have its times filled in.
+void FillInTimes(std::vector<double> compress_times, 
+                 std::vector<double> decompress_times, 
+                 Results* results);
 
 Results lz4Test(int num_iterations, Dataset& data);
 
 Results lzmaTest(int num_iterations, Dataset& data);
 
-Results deflate_test(int num_iterations, Dataset data);
+Results deflateTest(int num_iterations, Dataset data);
 #endif // COMPRESSION_TEST_HEADER_
