@@ -45,42 +45,58 @@
 #include <vector>
 #include <ctime>
 
+// Lastly, OMP, for its timing features
+#include <omp.h>
+
 Results lz4Test(int num_iterations, Dataset& data) {
   // Time vector for compression
   std::vector<double> compression_times;
   // Time vector for decompression
   std::vector<double> decompression_times;
   // Buffers needed for compression and decompression
-  char* decompressed = new char[data.data_length];
-  char* compressed = new char[LZ4_compressBound(data.data_length)];
+  int data_length = data.bytes.size();
+  char* decompressed = new char[data_length];
+  char* compressed = new char[LZ4_compressBound(data_length)];
   
+  // Variable to hold the compression ratio
+  double compression_ratio;
+
   // Copy source data into decompressed buffer
-  for(int i = 0; i < data.data_length; i++)
-    decompressed[i] = data.data[i];
+  for(int i = 0; i < data_length; i++)
+    decompressed[i] = data.bytes.at(i);
     
   // Run tests
   for(int i = 0; i < num_iterations; i++) {
     /// Compression
     // Get time
-    time_t init_compress = time(NULL); 
+    double init_compress = omp_get_wtime(); 
     // Test compression
-    int compressed_bytes = LZ4_compress(decompressed, compressed, data.data_length);
+    int compressed_bytes = LZ4_compress(decompressed, compressed, data_length);
     // Get time and calculate difference
-    time_t compress_time = time(NULL);
-    compression_times.push_back(difftime(compress_time, init_compress));
+    double compress_time = omp_get_wtime();
+    compression_times.push_back(compress_time - init_compress);
 
     /// Decompression
     // Get time
-    time_t init_decompress = time(NULL);
+    double init_decompress = omp_get_wtime();
     // Test decompression
-    int decompressed_bytes = LZ4_decompress_safe(compressed, decompressed, compressed_bytes, data.data_length);
+    int decompressed_bytes = LZ4_decompress_safe(compressed, decompressed, compressed_bytes, data_length);
     // Get time and calculate difference
-    time_t decompress_time = time(NULL);
-    decompression_times.push_back(difftime(decompress_time, init_decompress));
+    double decompress_time = omp_get_wtime();
+    decompression_times.push_back(decompress_time - init_decompress);
+    // Set the ratio on the first iteration
+    if(i == 0) compression_ratio = ((double)data.bytes.size())/((double)compressed_bytes);
+
   }
 
   // Fill in results
   Results results;
+  // Name
+  results.dataset_name = data.name;
+  // Compression ratio
+  results.compression_ratio = compression_ratio;
+  // Times
+  FillInTimes(compression_times, decompression_times, &results);
 
   // ... and we're done.
   return results;
