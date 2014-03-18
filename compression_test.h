@@ -83,24 +83,7 @@ typedef struct Results Results;
 // The file must be a text file in which values are separated by spaces
 // and lines by a line break.
 // The file is read line-by-line and each "word" is attributed to a "cell".
-bool LoadDataset(std::string filename, Dataset * dataset){
-  // Variable declarations
-  std::ifstream infile(filename.c_str());
-  std::string line;
-
-  // Check if file opened correctly
-  if(!infile.is_open()) {
-    // Error!
-    return false;
-  }
-
-  // Read file line by line
-  while (getline(infile,line)) {
-  }
-
-  // Close file and return
-  infile.close();
-}
+bool LoadDataset(std::string filename, Dataset * dataset);
 
 Results lz4Test(int num_iterations, Dataset& data);
 

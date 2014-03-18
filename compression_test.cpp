@@ -37,6 +37,26 @@
 
 #include "compression_test.h"
 
+bool LoadDataset(std::string filename, Dataset * dataset){
+  // Variable declarations
+  std::ifstream infile(filename.c_str());
+  std::string line;
+
+  // Check if file opened correctly
+  if(!infile.is_open()) {
+    // Error!
+    return false;
+  }
+
+  // Read file line by line
+  while (getline(infile,line)) {
+  }
+
+  // Close file and return
+  infile.close();
+}
+
+
 int main() {
 	return 0;
 }
