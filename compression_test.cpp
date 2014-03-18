@@ -37,26 +37,94 @@
 
 #include "compression_test.h"
 
+#include <sstream>
+#include <iterator>
+#include <cstdlib>
+#include <iostream>
+#include <cmath>
+
 bool LoadDataset(std::string filename, Dataset * dataset){
   // Variable declarations
   std::ifstream infile(filename.c_str());
   std::string line;
+  dataset->name = filename;
 
   // Check if file opened correctly
   if(!infile.is_open()) {
     // Error!
     return false;
   }
-
-  // Read file line by line
-  while (getline(infile,line)) {
+  
+  // Read file into vector line by line
+  while(std::getline(infile,line)) {
+    // Break line into tokens
+    std::istringstream line_stream(line);
+    std::string element;
+    // Create vector of tokens
+    std::vector<std::string> tokens;
+    while(std::getline(line_stream, element, ' ')) {
+      tokens.push_back(element);
+    }   
+    // Reserve space for new elements
+    dataset->bytes.reserve(dataset->bytes.size()+tokens.size());
+    // Copy data
+    for(int i = 0; i < tokens.size(); i++)
+      dataset->bytes.push_back(atoi(tokens.at(i).c_str()));
   }
 
   // Close file and return
   infile.close();
 }
 
+void FillInTimes(std::vector<double> compress_times, 
+                 std::vector<double> decompress_times, Results* results) {
+  // Average compression time
+  double avg = 0;
+  for(int i = 0; i < compress_times.size(); i++) {
+    avg += compress_times.at(i);
+  }
+  avg = avg/compress_times.size();
+  results->avg_time_compression = avg;
+  
+  // Standard deviation of compression time
+  double aux = 0;
+  for(int i = 0; i < compress_times.size(); i++)
+    aux += (compress_times.at(i) - avg)*(compress_times.at(i) - avg);
+  results->std_deviation_compression = sqrt(((double)1/(double)compress_times.size()) * aux);
+  
+  // Average decompression time
+  avg = 0;
+  for(int i = 0; i < decompress_times.size(); i++) {
+    avg += decompress_times.at(i);
+  }
+  avg = avg/decompress_times.size();
+  results->avg_time_decompression = avg;
+  
+  // Standard deviation of decompression time
+  aux = 0;
+  for(int i = 0; i < decompress_times.size(); i++)
+    aux += (decompress_times.at(i) - avg)*(decompress_times.at(i) - avg);
+  results->std_deviation_decompression = sqrt(((double)1/(double)decompress_times.size()) * aux);
+}
 
 int main() {
-	return 0;
+  // Import dataset
+  Dataset cenas;
+  LoadDataset(std::string("datasets/intel1000.txt"), &cenas);
+  std::cout << "Dataset size: " << cenas.bytes.size() << std::endl;
+
+  // Test stuff
+  int n_iter = 1000;
+  std::cout << "Testing with " << n_iter << " iterations." << std::endl;
+  Results lz4_results = lz4Test(n_iter, cenas);
+  
+  // Section to make a display function out of:
+  std::cout << "LZ4 ratio: " << lz4_results.compression_ratio << std::endl;
+  std::cout << "LZ4 mean compression time: " << lz4_results.avg_time_compression*1000 << "ms." << std::endl;
+  std::cout << "LZ4 mean decompression time: " << lz4_results.avg_time_decompression*1000 << "ms." << std::endl;
+  std::cout << "LZ4 std compression time: " << lz4_results.std_deviation_compression*1000 << "ms." << std::endl;
+  std::cout << "LZ4 std decompression time: " << lz4_results.std_deviation_decompression*1000 << "ms." << std::endl;
+
+  // Return
+  return 0;
 }
