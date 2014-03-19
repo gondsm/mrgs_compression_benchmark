@@ -105,5 +105,5 @@ Results lz4Test(int num_iterations, Dataset& data);
 
 Results lzmaTest(int num_iterations, Dataset& data);
 
-Results deflateTest(int num_iterations, Dataset data);
+Results deflateTest(int num_iterations, Dataset& data);
 #endif // COMPRESSION_TEST_HEADER_

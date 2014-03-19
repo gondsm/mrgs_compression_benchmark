@@ -41,16 +41,18 @@
 
 int main() {
   // Import dataset
-  Dataset cenas;
-  LoadDataset(std::string("datasets/intel1000.txt"), &cenas);
-  //std::cout << "Dataset size: " << cenas.bytes.size() << std::endl;
+  Dataset d1;
+  LoadDataset(std::string("datasets/intel1000.txt"), &d1);
+
+  // Declare output vector
+  std::vector<Results> result_vector;
 
   // Test stuff
   int n_iter = 1000;
-  //std::cout << "Testing with " << n_iter << " iterations." << std::endl;
-  Results lz4_results = lz4Test(n_iter, cenas);
-  std::vector<Results> result_vector;
+  Results lz4_results = lz4Test(n_iter, d1);
   result_vector.push_back(lz4_results);
+  Results deflate_results = deflateTest(n_iter, d1);
+  result_vector.push_back(deflate_results);
   
   // Section to make a display function out of:
   /*std::cout << "LZ4 ratio: " << lz4_results.compression_ratio << std::endl;

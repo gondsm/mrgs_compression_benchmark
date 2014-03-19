@@ -130,5 +130,7 @@ void WriteResults(std::vector<Results>& results){
     std::cout.width(col_width);
     std::cout << std::left << results.at(i).avg_time_decompression*1000;
     std::cout << std::endl;
+    // Blank line, for readability
+    std::cout << std::endl;
   }
 }
