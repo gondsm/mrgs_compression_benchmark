@@ -41,6 +41,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
+#include <fstream>
 
 bool LoadDataset(std::string filename, Dataset * dataset){
   // Variable declarations
@@ -107,9 +108,30 @@ void FillInTimes(std::vector<double> compress_times,
 }
 
 void WriteResults(std::vector<Results>& results){
+  // Declarations
   int col_width = 18;
+  std::ofstream results_file("results.csv");
+  
+  // Setup csv header:
+  results_file << "technique_name,dataset_name,dataset_size,"
+               << "ratio,average_compression_time_ms,std_compression_time_ms,"
+               << "average_decompression_time_ms,std_decompression_time_ms"
+               << std:: endl;
+  
   for(int i = 0; i < results.size(); i++)
   {
+    /// CSV
+    results_file << results.at(i).technique_name << ","
+                 << results.at(i).dataset_name << ","
+                 << results.at(i).dataset_size << ","
+                 << results.at(i).compression_ratio << ","
+                 << results.at(i).avg_time_compression*1000 << ","
+                 << results.at(i).std_deviation_compression*1000 << ","
+                 << results.at(i).avg_time_decompression*1000 << ","
+                 << results.at(i).std_deviation_decompression*1000 << ","
+                 << std::endl;
+    
+    /// stdout
     // Names
     std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
     std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";

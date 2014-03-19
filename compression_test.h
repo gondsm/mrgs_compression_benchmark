@@ -57,7 +57,7 @@ struct Dataset {
 };
 
 struct Results {
-  // Dataset/technique name
+  // Dataset/technique name, dataset size
   std::string dataset_name;
   unsigned int dataset_size;
   std::string technique_name;
