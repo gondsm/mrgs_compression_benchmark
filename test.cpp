@@ -40,19 +40,37 @@
 #include <iostream>
 
 int main() {
-  // Import dataset
-  Dataset d1;
-  LoadDataset(std::string("datasets/intel1000.txt"), &d1);
-
+  /// Import datasets
+  // Declare necessary vectors
+  std::vector<std::string> dataset_names;
+  std::vector<Dataset> datasets;
+  
+  // Add vectors (add your datasets here!)
+  dataset_names.push_back(std::string("datasets/intel1000.txt"));
+  
+  // Allocate necessary space in dataset vector
+  while(datasets.size() < dataset_names.size()) {
+    Dataset empty;
+    datasets.push_back(empty);
+  }
+  
+  // Load datasets
+  for(int i = 0; i < dataset_names.size(); i++) {
+    LoadDataset(dataset_names.at(i), &datasets.at(i));
+  }
+  
+  /// Test algorithms
   // Declare output vector
   std::vector<Results> result_vector;
-
+  
   // Test stuff
   int n_iter = 50;
-  Results lz4_results = lz4Test(n_iter, d1);
-  result_vector.push_back(lz4_results);
-  Results deflate_results = deflateTest(n_iter, d1);
-  result_vector.push_back(deflate_results);
+  for(int i = 0; i < datasets.size(); i++) {
+    Results lz4_results = lz4Test(n_iter, datasets.at(i));
+    result_vector.push_back(lz4_results);
+    Results deflate_results = deflateTest(n_iter, datasets.at(i));
+    result_vector.push_back(deflate_results);
+  }
   
   // Write results
   WriteResults(result_vector);
