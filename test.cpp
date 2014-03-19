@@ -48,7 +48,7 @@ int main() {
   std::vector<Results> result_vector;
 
   // Test stuff
-  int n_iter = 1000;
+  int n_iter = 50;
   Results lz4_results = lz4Test(n_iter, d1);
   result_vector.push_back(lz4_results);
   Results deflate_results = deflateTest(n_iter, d1);

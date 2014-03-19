@@ -88,9 +88,14 @@ Results lz4Test(int num_iterations, Dataset& data) {
     if(i == 0) compression_ratio = ((double)data.bytes.size())/((double)compressed_bytes);
 
   }
+  
+  delete compressed;
+  delete decompressed;
 
   // Fill in results
   Results results;
+  // Set error to false (we'll implement error detection later)
+  results.error = false;
   // Name
   results.dataset_name = data.name;
   results.technique_name = "LZ4";
