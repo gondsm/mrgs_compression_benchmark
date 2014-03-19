@@ -93,6 +93,7 @@ Results lz4Test(int num_iterations, Dataset& data) {
   Results results;
   // Name
   results.dataset_name = data.name;
+  results.technique_name = "LZ4";
   // Compression ratio
   results.compression_ratio = compression_ratio;
   // Times

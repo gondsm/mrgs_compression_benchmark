@@ -57,8 +57,9 @@ struct Dataset {
 };
 
 struct Results {
-  // Dataset name
+  // Dataset/technique name
   std::string dataset_name;
+  std::string technique_name;
   // Compression stats
   double avg_time_compression;
   double std_deviation_compression;
@@ -94,6 +95,11 @@ bool LoadDataset(std::string filename, Dataset * dataset);
 void FillInTimes(std::vector<double> compress_times, 
                  std::vector<double> decompress_times, 
                  Results* results);
+
+// This function writes the test results to stdout and, maybe, into a log
+// file for easier viewing.
+// results is a Results struct, title is the title you want for this technique.
+void WriteResults(Results& results);
 
 Results lz4Test(int num_iterations, Dataset& data);
 
