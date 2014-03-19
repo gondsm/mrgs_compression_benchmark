@@ -106,25 +106,3 @@ void FillInTimes(std::vector<double> compress_times,
     aux += (decompress_times.at(i) - avg)*(decompress_times.at(i) - avg);
   results->std_deviation_decompression = sqrt(((double)1/(double)decompress_times.size()) * aux);
 }
-
-int main() {
-  // Import dataset
-  Dataset cenas;
-  LoadDataset(std::string("datasets/intel1000.txt"), &cenas);
-  std::cout << "Dataset size: " << cenas.bytes.size() << std::endl;
-
-  // Test stuff
-  int n_iter = 1000;
-  std::cout << "Testing with " << n_iter << " iterations." << std::endl;
-  Results lz4_results = lz4Test(n_iter, cenas);
-  
-  // Section to make a display function out of:
-  std::cout << "LZ4 ratio: " << lz4_results.compression_ratio << std::endl;
-  std::cout << "LZ4 mean compression time: " << lz4_results.avg_time_compression*1000 << "ms." << std::endl;
-  std::cout << "LZ4 mean decompression time: " << lz4_results.avg_time_decompression*1000 << "ms." << std::endl;
-  std::cout << "LZ4 std compression time: " << lz4_results.std_deviation_compression*1000 << "ms." << std::endl;
-  std::cout << "LZ4 std decompression time: " << lz4_results.std_deviation_decompression*1000 << "ms." << std::endl;
-
-  // Return
-  return 0;
-}
