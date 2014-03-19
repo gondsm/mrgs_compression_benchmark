@@ -49,6 +49,8 @@
 #include <omp.h>
 
 Results lz4Test(int num_iterations, Dataset& data) {
+  Results results;
+  results.error = false;  
   // Time vector for compression
   std::vector<double> compression_times;
   // Time vector for decompression
@@ -56,6 +58,7 @@ Results lz4Test(int num_iterations, Dataset& data) {
   // Buffers needed for compression and decompression
   int data_length = data.bytes.size();
   char* decompressed = new char[data_length];
+  char* uncompressed = new char[data_length];
   char* compressed = new char[LZ4_compressBound(data_length)];
   
   // Variable to hold the compression ratio
@@ -63,7 +66,7 @@ Results lz4Test(int num_iterations, Dataset& data) {
 
   // Copy source data into decompressed buffer
   for(int i = 0; i < data_length; i++)
-    decompressed[i] = data.bytes.at(i);
+    uncompressed[i] = data.bytes.at(i);
     
   // Run tests
   for(int i = 0; i < num_iterations; i++) {
@@ -71,7 +74,7 @@ Results lz4Test(int num_iterations, Dataset& data) {
     // Get time
     double init_compress = omp_get_wtime(); 
     // Test compression
-    int compressed_bytes = LZ4_compress(decompressed, compressed, data_length);
+    int compressed_bytes = LZ4_compress(uncompressed, compressed, data_length);
     // Get time and calculate difference
     double compress_time = omp_get_wtime();
     compression_times.push_back(compress_time - init_compress);
@@ -89,13 +92,11 @@ Results lz4Test(int num_iterations, Dataset& data) {
 
   }
   
+  // Clean up
   delete compressed;
   delete decompressed;
 
   // Fill in results
-  Results results;
-  // Set error to false (we'll implement error detection later)
-  results.error = false;
   // Name
   results.dataset_name = data.name;
   results.technique_name = "LZ4";
