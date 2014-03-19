@@ -38,7 +38,6 @@
 #include "compression_test.h"
 
 #include <sstream>
-#include <iterator>
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
@@ -105,4 +104,31 @@ void FillInTimes(std::vector<double> compress_times,
   for(int i = 0; i < decompress_times.size(); i++)
     aux += (decompress_times.at(i) - avg)*(decompress_times.at(i) - avg);
   results->std_deviation_decompression = sqrt(((double)1/(double)decompress_times.size()) * aux);
+}
+
+void WriteResults(std::vector<Results>& results){
+  int col_width = 18;
+  for(int i = 0; i < results.size(); i++)
+  {
+    // Names
+    std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
+    std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";
+    std::cout << std::endl;
+    // Heading
+    std::cout.width(col_width-5);
+    std::cout << std::left << "Comp. Ratio";
+    std::cout.width(col_width);
+    std::cout << std::left << "Avg t (comp)[ms]";
+    std::cout.width(col_width);
+    std::cout << std::left << "Avg t (decomp)[ms]";
+    std::cout << std::endl;
+    // Results
+    std::cout.width(col_width-5);
+    std::cout << std::left << results.at(i).compression_ratio;
+    std::cout.width(col_width);
+    std::cout << std::left << results.at(i).avg_time_compression*1000;
+    std::cout.width(col_width);
+    std::cout << std::left << results.at(i).avg_time_decompression*1000;
+    std::cout << std::endl;
+  }
 }
