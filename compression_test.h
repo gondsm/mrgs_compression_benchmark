@@ -53,7 +53,7 @@ struct Dataset {
   // Dataset's name (its filename)
   std::string name;
   // The data we want to (de)compress, in row-major order
-  std::vector<char> bytes;
+  std::vector<unsigned char> bytes;
 };
 
 struct Results {
