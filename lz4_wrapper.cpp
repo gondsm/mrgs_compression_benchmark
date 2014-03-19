@@ -41,9 +41,8 @@
 // Include our header
 #include "compression_test.h"
 
-// And we'll also need vectors (they're handy), and timing
+// And we'll also need vectors (they're handy)
 #include <vector>
-#include <ctime>
 
 // Lastly, OMP, for its timing features
 #include <omp.h>

@@ -54,13 +54,7 @@ int main() {
   Results deflate_results = deflateTest(n_iter, d1);
   result_vector.push_back(deflate_results);
   
-  // Section to make a display function out of:
-  /*std::cout << "LZ4 ratio: " << lz4_results.compression_ratio << std::endl;
-  std::cout << "LZ4 mean compression time: " << lz4_results.avg_time_compression*1000 << "ms." << std::endl;
-  std::cout << "LZ4 mean decompression time: " << lz4_results.avg_time_decompression*1000 << "ms." << std::endl;
-  std::cout << "LZ4 std compression time: " << lz4_results.std_deviation_compression*1000 << "ms." << std::endl;
-  std::cout << "LZ4 std decompression time: " << lz4_results.std_deviation_decompression*1000 << "ms." << std::endl;*/
-  
+  // Write results
   WriteResults(result_vector);
 
   // Return
