@@ -62,6 +62,9 @@ Results deflateTest(int num_iterations, Dataset& data) {
   unsigned char* decompressed = new unsigned char[data_length];
   unsigned char* compressed = new unsigned char[data_length];
   
+  // Write size to result
+  results.dataset_size = data_length;  
+  
   // Copy source data into decompressed buffer
   for(int i = 0; i < data_length; i++)
     uncompressed[i] = data.bytes.at(i);

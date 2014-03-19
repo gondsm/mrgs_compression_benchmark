@@ -59,6 +59,7 @@ struct Dataset {
 struct Results {
   // Dataset/technique name
   std::string dataset_name;
+  unsigned int dataset_size;
   std::string technique_name;
   // Compression stats
   double avg_time_compression;

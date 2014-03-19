@@ -47,6 +47,7 @@ int main() {
   
   // Add vectors (add your datasets here!)
   dataset_names.push_back(std::string("datasets/intel1000.txt"));
+  dataset_names.push_back(std::string("datasets/intel.txt"));
   
   // Allocate necessary space in dataset vector
   while(datasets.size() < dataset_names.size()) {
@@ -75,7 +76,7 @@ int main() {
   // Write results
   WriteResults(result_vector);
 
-  // Return
+  /// Done!
   return 0;
 }
 

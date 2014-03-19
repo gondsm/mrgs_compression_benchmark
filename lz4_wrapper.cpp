@@ -49,7 +49,7 @@
 
 Results lz4Test(int num_iterations, Dataset& data) {
   Results results;
-  results.error = false;  
+  results.error = false;
   // Time vector for compression
   std::vector<double> compression_times;
   // Time vector for decompression
@@ -59,6 +59,9 @@ Results lz4Test(int num_iterations, Dataset& data) {
   char* decompressed = new char[data_length];
   char* uncompressed = new char[data_length];
   char* compressed = new char[LZ4_compressBound(data_length)];
+  
+  // Write size to result
+  results.dataset_size = data_length;
   
   // Variable to hold the compression ratio
   double compression_ratio;

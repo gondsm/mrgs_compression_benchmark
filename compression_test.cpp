@@ -114,6 +114,8 @@ void WriteResults(std::vector<Results>& results){
     std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
     std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";
     std::cout << std::endl;
+    std::cout << std::left << "Dataset length: " << results.at(i).dataset_size << " bytes.";
+    std::cout << std::endl;
     // Detect errors
     if(results.at(i).error == true) {
       std::cout << "An error occurred during this test!" << std::endl;
