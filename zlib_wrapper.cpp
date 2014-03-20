@@ -110,6 +110,8 @@ Results deflateTest(int num_iterations, Dataset& data) {
   // Name
   results.dataset_name = data.name;
   results.technique_name = "DEFLATE (zlib)";
+  // Number of iterations
+  results.num_iterations = num_iterations;
   // Compression ratio
   results.compression_ratio = compression_ratio;
   // Times

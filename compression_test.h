@@ -61,6 +61,8 @@ struct Results {
   std::string dataset_name;
   unsigned int dataset_size;
   std::string technique_name;
+  // Number of iterations
+  unsigned int num_iterations;
   // Compression stats
   double avg_time_compression;
   double std_deviation_compression;
