@@ -73,6 +73,8 @@ int main() {
     result_vector.push_back(deflate_results);
     Results lzma_results = lzmaTest(n_iter, datasets.at(i));
     result_vector.push_back(lzma_results);
+    Results quicklz_results = quicklzTest(n_iter, datasets.at(i));
+    result_vector.push_back(quicklz_results);
   }
   
   // Write results

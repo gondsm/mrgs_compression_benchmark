@@ -118,4 +118,7 @@ Results lzmaTest(int num_iterations, Dataset& data);
 // Test function for DEFLATE (zlib) with the default parameters
 Results deflateTest(int num_iterations, Dataset& data);
 
+// Test function for QuickLZ
+Results quicklzTest(int num_iterations, Dataset& data);
+
 #endif // COMPRESSION_TEST_HEADER_
