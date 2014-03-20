@@ -97,6 +97,7 @@ Results lz4Test(int num_iterations, Dataset& data) {
   // Clean up
   delete compressed;
   delete decompressed;
+  delete uncompressed;
 
   // Fill in results
   // Name

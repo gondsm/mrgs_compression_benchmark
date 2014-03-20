@@ -104,9 +104,18 @@ void FillInTimes(std::vector<double> compress_times,
 // results is a Results struct, title is the title you want for this technique.
 void WriteResults(std::vector<Results>& results);
 
+/** Test Functions
+ *  These functions are wrappers around the API for each of the compression
+ *  techniques we're testing. New techniques that are added to the tool should
+ *  usually be declared here.
+ */
+// Test function for LZ4 with the default parameters
 Results lz4Test(int num_iterations, Dataset& data);
 
+// Test function for LZMA with the default parameters
 Results lzmaTest(int num_iterations, Dataset& data);
 
+// Test function for DEFLATE (zlib) with the default parameters
 Results deflateTest(int num_iterations, Dataset& data);
+
 #endif // COMPRESSION_TEST_HEADER_
