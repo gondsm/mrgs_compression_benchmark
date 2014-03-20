@@ -18,3 +18,10 @@ mv lzma920.tar.bz2 lzma/
 cd lzma
 tar xf lzma920.tar.bz2
 rm lzma920.tar.bz2
+cd ..
+
+# Pull quicklz
+mkdir quicklz
+cd quicklz
+wget http://www.quicklz.com/quicklz.h
+wget http://www.quicklz.com/quicklz.c
