@@ -35,7 +35,7 @@
 * Author: Gonçalo S. Martins, 2014
 *********************************************************************/
 
-// Include lz4
+// Include zlib
 #include "zlib/zlib.h"
 
 // Include our header
