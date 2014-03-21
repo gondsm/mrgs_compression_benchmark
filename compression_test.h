@@ -91,6 +91,9 @@ typedef struct Results Results;
 // The dataset must already be allocated.
 bool LoadDataset(std::string filename, Dataset * dataset);
 
+// This function loads a PGM grayscale image into a dataset structure.
+bool LoadDatasetPGM(std::string filename, Dataset* dataset);
+
 // This function fills in the average and standard deviation of the compression
 // and decompression times. Saves us from repeating a lot of code.
 // results must, of course, already be allocated. If all goes well, after

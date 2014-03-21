@@ -76,6 +76,10 @@ bool LoadDataset(std::string filename, Dataset * dataset){
   infile.close();
 }
 
+bool LoadDatasetPGM(std::string filename, Dataset* dataset){
+  return true;
+}
+
 void FillInTimes(std::vector<double> compress_times, 
                  std::vector<double> decompress_times, Results* results) {
   // Average compression time
