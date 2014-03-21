@@ -1,9 +1,9 @@
 % Determine the number of lines in results file:
-[status, result] = system( ['wc -l ', 'results.csv'] );
+[status, result] = system( ['wc -l ', '../results.csv'] );
 token = strtok(result, ' ');
 
 % Import results
-[technique_name,dataset_name,dataset_size,num_iterations,ratio,average_compression_time_ms,std_compression_time_ms,average_decompression_time_ms,std_decompression_time_ms] = importresults('results.csv', 2, str2num(token(1)));
+[technique_name,dataset_name,dataset_size,num_iterations,ratio,average_compression_time_ms,std_compression_time_ms,average_decompression_time_ms,std_decompression_time_ms] = importresults('../results.csv', 2, str2num(token(1)));
 
 % Determine all the different datasets and their indices
 

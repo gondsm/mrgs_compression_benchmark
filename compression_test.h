@@ -124,8 +124,16 @@ Results lz4TestTwoPass(int num_iterations, Dataset& data);
 // Test function for LZMA with the default parameters
 Results lzmaTest(int num_iterations, Dataset& data);
 
+// Test functions for LZMA with fastest and slowest settings
+Results lzmaTestSlow(int num_iterations, Dataset& data);
+Results lzmaTestFast(int num_iterations, Dataset& data);
+
 // Test function for DEFLATE (zlib) with the default parameters
 Results deflateTest(int num_iterations, Dataset& data);
+
+// Test functions for DEFLATE with fastest and slowest settings
+Results deflateTestFast(int num_iterations, Dataset& data);
+Results deflateTestSlow(int num_iterations, Dataset& data);
 
 // Test function for QuickLZ
 Results quicklzTest(int num_iterations, Dataset& data);

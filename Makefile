@@ -1,9 +1,9 @@
-DEFINITIONFILES = lz4_wrapper.cpp lz4_wrapper_twopass.cpp zlib_wrapper.cpp lzma_wrapper.cpp quicklz_wrapper.cpp compression_test.cpp
+DEFINITIONFILES = wrappers/lz4_wrapper.cpp wrappers/lz4_wrapper_twopass.cpp wrappers/zlib_wrapper.cpp wrappers/zlib_wrapper_fastest.cpp wrappers/zlib_wrapper_slowest.cpp wrappers/lzma_wrapper.cpp wrappers/lzma_wrapper_fastest.cpp wrappers/lzma_wrapper_slowest.cpp wrappers/quicklz_wrapper.cpp compression_test.cpp
 LIBS = lz4/lz4.o zlib/libz.so lzma/C/liblzma.so quicklz/libquicklz.so
 LZMA_CODE = lzma/C/Alloc.c lzma/C/Bra.c lzma/C/LzFind.c lzma/C/LzmaDec.c lzma/C/LzmaEnc.c lzma/C/LzmaLib.c
 
 test: $(DEFINITIONFILES) $(LIBS) compression_test.cpp compression_test.h test.cpp
-	g++ $(DEFINITIONFILES) test.cpp -o test $(LIBS) -lgomp -lrt -lm
+	g++ $(DEFINITIONFILES) -I./ test.cpp -o test $(LIBS) -lgomp -lrt -lm
 
 lzma/C/liblzma.so:
 	gcc -shared -fPIC -O2 -D_7ZIP_ST -o lzma/C/liblzma.so $(LZMA_CODE)
