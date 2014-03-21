@@ -63,6 +63,12 @@ int main() {
     LoadDatasetPGM(dataset_names.at(i), &datasets.at(i));
   }
   
+  Dataset newset;
+  LoadDataset(std::string("datasets/intel.txt"), &newset);
+  datasets.push_back(newset);
+  LoadDataset(std::string("datasets/intel1000.txt"), &newset);
+  datasets.push_back(newset);
+  
   /// Test algorithms
   // Declare output vector
   std::vector<Results> result_vector;
