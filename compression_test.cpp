@@ -164,7 +164,7 @@ void FillInTimes(std::vector<double> compress_times,
 void WriteResults(std::vector<Results>& results){
   // Declarations
   int col_width = 18;
-  std::ofstream results_file("results.csv");
+  std::ofstream results_file("matlab/results.csv");
   
   // Setup csv header:
   results_file << "technique_name,dataset_name,dataset_size,num_iterations,"
