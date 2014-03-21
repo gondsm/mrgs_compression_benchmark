@@ -118,6 +118,9 @@ void WriteResults(std::vector<Results>& results);
 // Test function for LZ4 with the default parameters
 Results lz4Test(int num_iterations, Dataset& data);
 
+// Test function for LZ4, compressing the data twice
+Results lz4TestTwoPass(int num_iterations, Dataset& data);
+
 // Test function for LZMA with the default parameters
 Results lzmaTest(int num_iterations, Dataset& data);
 
