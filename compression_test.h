@@ -72,7 +72,10 @@ struct Results {
   // Compression ratio achieved
   double compression_ratio;
   // Were there any errors?
-  bool error;	
+  // 0: No errors
+  // 1: Error related to the technique
+  // 2: Data mismatch error
+  char error;
 };
 
 typedef struct Dataset Dataset;

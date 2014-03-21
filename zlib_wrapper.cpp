@@ -49,7 +49,7 @@
 
 Results deflateTest(int num_iterations, Dataset& data) {
   Results results;
-  results.error = false;
+  results.error = 0;
   // Time vector for compression
   std::vector<double> compression_times;
   // Time vector for decompression
@@ -97,7 +97,13 @@ Results deflateTest(int num_iterations, Dataset& data) {
 
     /// Check for errors
     if(compress_return != Z_OK || decompress_return != Z_OK)
-      results.error = true;
+      results.error = 1;
+    else 
+      if(decompressed_bytes != data_length)
+        results.error = 2;
+      else
+        for(int i = 0; i < data_length; i++)
+          if(decompressed[i] != uncompressed[i]) results.error = 2;
   }
   
   // Clean up

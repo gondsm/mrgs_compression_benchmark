@@ -70,14 +70,10 @@ int main() {
   // Test stuff
   int n_iter = 50;
   for(int i = 0; i < datasets.size(); i++) {
-    Results lz4_results = lz4Test(n_iter, datasets.at(i));
-    result_vector.push_back(lz4_results);
-    Results deflate_results = deflateTest(n_iter, datasets.at(i));
-    result_vector.push_back(deflate_results);
-    Results lzma_results = lzmaTest(n_iter, datasets.at(i));
-    result_vector.push_back(lzma_results);
-    Results quicklz_results = quicklzTest(n_iter, datasets.at(i));
-    result_vector.push_back(quicklz_results);
+    result_vector.push_back(lz4Test(n_iter, datasets.at(i)));
+    result_vector.push_back(deflateTest(n_iter, datasets.at(i)));
+    result_vector.push_back(lzmaTest(n_iter, datasets.at(i)));
+    result_vector.push_back(quicklzTest(n_iter, datasets.at(i)));
   }
   
   // Write results

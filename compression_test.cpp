@@ -174,7 +174,28 @@ void WriteResults(std::vector<Results>& results){
   
   for(int i = 0; i < results.size(); i++)
   {
-    /// CSV
+    // Names
+    std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
+    std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";
+    std::cout << std::endl;
+    std::cout << std::left << "Dataset length: " << results.at(i).dataset_size << " bytes. ";
+    std::cout << std::left << "Iterations: " << results.at(i).num_iterations << ".";
+    std::cout << std::endl;
+    
+    // Detect errors
+    if(results.at(i).error != 0) {
+      switch(results.at(i).error) {
+      case 1:
+        std::cout << "This technique found an error while testing." << std::endl;
+        break;
+      case 2:
+        std::cout << "There was a data mismatch error in this technique's output" << std::endl;
+        break;
+      }
+      continue;
+    }
+    
+    // CSV
     results_file << results.at(i).technique_name << ","
                  << results.at(i).dataset_name << ","
                  << results.at(i).dataset_size << ","
@@ -186,18 +207,7 @@ void WriteResults(std::vector<Results>& results){
                  << results.at(i).std_deviation_decompression*1000 << ","
                  << std::endl;
     
-    /// stdout
-    // Names
-    std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
-    std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";
-    std::cout << std::endl;
-    std::cout << std::left << "Dataset length: " << results.at(i).dataset_size << " bytes.";
-    std::cout << std::endl;
-    // Detect errors
-    if(results.at(i).error == true) {
-      std::cout << "An error occurred during this test!" << std::endl;
-      continue;
-    }
+    
     // Heading
     std::cout.width(col_width-5);
     std::cout << std::left << "Comp. Ratio";
