@@ -74,9 +74,59 @@ bool LoadDataset(std::string filename, Dataset * dataset){
 
   // Close file and return
   infile.close();
+  return true;
 }
 
 bool LoadDatasetPGM(std::string filename, Dataset* dataset){
+  // Variable declarations
+  std::ifstream infile(filename.c_str());
+  std::string line;
+  dataset->name = filename;
+  
+  // Check if file opened correctly
+  if(!infile.is_open()) {
+    // Error!
+    return false;
+  }
+  
+  /// Read file
+  // Header
+  std::vector<std::string> header;
+  std::string comment;
+  bool last_whitespace_newline = true;
+  int string_counter = 0;
+  while(header.size() < 4) { // The PGM header contains 4 values
+    // Check for comments
+    if(last_whitespace_newline == true)
+      if(infile.peek() == '#')
+        getline(infile, comment, '\n');
+    // Get value char by char
+    header.push_back(std::string());
+    while(infile.peek() != '\n' && infile.peek() != '\t' && infile.peek() != ' ') {
+      header.at(string_counter) += infile.get();
+    }
+    
+    string_counter++;
+    
+    // Burn whitespace
+    while(infile.peek() == '\n' || infile.peek() == '\t' || infile.peek() == ' ') {
+      if(infile.get() == '\n') last_whitespace_newline = true;
+    }
+  }
+  
+  // Content
+  if(atoi(header.at(3).c_str()) > 255) 
+    return false;
+  char in;
+  while(infile) {
+    in = infile.get();
+    if(in != '\n') dataset->bytes.push_back(in);
+    else if(infile.peek() == '#')
+      getline(infile, comment, '\n');
+  }
+  
+  // We're done.
+  infile.close();
   return true;
 }
 

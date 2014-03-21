@@ -46,8 +46,10 @@ int main() {
   std::vector<Dataset> datasets;
   
   // Add vectors (add your datasets here!)
-  dataset_names.push_back(std::string("datasets/intel1000.txt"));
-  dataset_names.push_back(std::string("datasets/intel.txt"));
+  //dataset_names.push_back(std::string("datasets/intel1000.txt"));
+  //dataset_names.push_back(std::string("datasets/intel.txt"));
+  dataset_names.push_back(std::string("maps/mapa1.pgm"));
+  dataset_names.push_back(std::string("maps/mapa2.pgm"));
   
   // Allocate necessary space in dataset vector
   while(datasets.size() < dataset_names.size()) {
@@ -57,7 +59,8 @@ int main() {
   
   // Load datasets
   for(int i = 0; i < dataset_names.size(); i++) {
-    LoadDataset(dataset_names.at(i), &datasets.at(i));
+    //LoadDataset(dataset_names.at(i), &datasets.at(i));
+    LoadDatasetPGM(dataset_names.at(i), &datasets.at(i));
   }
   
   /// Test algorithms
