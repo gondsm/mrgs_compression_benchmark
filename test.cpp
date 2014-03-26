@@ -48,8 +48,10 @@ int main() {
   // Add vectors (add your datasets here!)
   //dataset_names.push_back(std::string("datasets/intel1000.txt"));
   //dataset_names.push_back(std::string("datasets/intel.txt"));
-  dataset_names.push_back(std::string("maps/mapa1.pgm"));
-  dataset_names.push_back(std::string("maps/mapa2.pgm"));
+  dataset_names.push_back(std::string("pgm/mapa1.pgm"));
+  dataset_names.push_back(std::string("pgm/mapa2.pgm"));
+  dataset_names.push_back(std::string("pgm/intel.pgm"));
+  dataset_names.push_back(std::string("pgm/aces.pgm"));
   
   // Allocate necessary space in dataset vector
   while(datasets.size() < dataset_names.size()) {
@@ -63,32 +65,45 @@ int main() {
     LoadDatasetPGM(dataset_names.at(i), &datasets.at(i));
   }
   
-  Dataset newset;
-  LoadDataset(std::string("datasets/intel.txt"), &newset);
-  datasets.push_back(newset);
-  LoadDataset(std::string("datasets/intel1000.txt"), &newset);
-  datasets.push_back(newset);
-  
   /// Test algorithms
   // Declare output vector
   std::vector<Results> result_vector;
   
   // Test stuff
-  int n_iter = 50;
+  int n_iter = 1000;
   for(int i = 0; i < datasets.size(); i++) {
+    std::cout << "Dataset: " << dataset_names.at(i) << std::endl;
+    std::cout << "Testing LZ4... ";
     result_vector.push_back(lz4Test(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing LZ4 Slow..." << std::endl;
     result_vector.push_back(lz4TestSlow(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing DEFLATE..." << std::endl;
     result_vector.push_back(deflateTest(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing DEFLATE Fast..." << std::endl;
     result_vector.push_back(deflateTestFast(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing DEFLATE Slow..." << std::endl;
     result_vector.push_back(deflateTestSlow(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing LZMA..." << std::endl;
     result_vector.push_back(lzmaTest(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing LZMA Fast..." << std::endl;
     result_vector.push_back(lzmaTestFast(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing LZMA Slow..." << std::endl;
     result_vector.push_back(lzmaTestSlow(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing QuickLZ..." << std::endl;
     result_vector.push_back(quicklzTest(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl << std::endl;
   }
   
   // Write results
-  WriteResults(result_vector, std::string("matlab/results.csv"));
+  WriteResults(result_vector, std::string("matlab/results.csv"), false);
 
   /// Done!
   return 0;

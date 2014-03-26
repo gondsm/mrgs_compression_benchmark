@@ -108,7 +108,7 @@ void FillInTimes(std::vector<double> compress_times,
 // This function writes the test results to stdout and, maybe, into a log
 // file for easier viewing.
 // results is a Results struct, title is the title you want for this technique.
-void WriteResults(std::vector<Results>& results, std::string filename);
+void WriteResults(std::vector<Results>& results, std::string filename, bool stdout);
 
 /** Test Functions
  *  These functions are wrappers around the API for each of the compression

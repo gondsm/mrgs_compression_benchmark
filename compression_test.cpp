@@ -161,7 +161,7 @@ void FillInTimes(std::vector<double> compress_times,
   results->std_deviation_decompression = sqrt(((double)1/(double)decompress_times.size()) * aux);
 }
 
-void WriteResults(std::vector<Results>& results, std::string filename){
+void WriteResults(std::vector<Results>& results, std::string filename, bool print_to_terminal){
   // Declarations
   int col_width = 18;
   std::ofstream results_file(filename.c_str());
@@ -175,21 +175,26 @@ void WriteResults(std::vector<Results>& results, std::string filename){
   for(int i = 0; i < results.size(); i++)
   {
     // Names
-    std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
-    std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";
-    std::cout << std::endl;
-    std::cout << std::left << "Dataset length: " << results.at(i).dataset_size << " bytes. ";
-    std::cout << std::left << "Iterations: " << results.at(i).num_iterations << ".";
-    std::cout << std::endl;
+    if(print_to_terminal == true)
+    {
+      std::cout << std::left << "Name: '" << results.at(i).technique_name << "'. "; 
+      std::cout << std::left << "Dataset: '" << results.at(i).dataset_name <<"'.";
+      std::cout << std::endl;
+      std::cout << std::left << "Dataset length: " << results.at(i).dataset_size << " bytes. ";
+      std::cout << std::left << "Iterations: " << results.at(i).num_iterations << ".";
+      std::cout << std::endl;
+    }
     
     // Detect errors
     if(results.at(i).error != 0) {
       switch(results.at(i).error) {
       case 1:
-        std::cout << "This technique found an error while testing." << std::endl;
+        if(print_to_terminal == true)
+          std::cout << "This technique found an error while testing." << std::endl;
         break;
       case 2:
-        std::cout << "There was a data mismatch error in this technique's output" << std::endl;
+        if(print_to_terminal == true)
+          std::cout << "There was a data mismatch error in this technique's output" << std::endl;
         break;
       }
       continue;
@@ -207,24 +212,26 @@ void WriteResults(std::vector<Results>& results, std::string filename){
                  << results.at(i).std_deviation_decompression*1000 << ","
                  << std::endl;
     
-    
-    // Heading
-    std::cout.width(col_width-5);
-    std::cout << std::left << "Comp. Ratio";
-    std::cout.width(col_width);
-    std::cout << std::left << "Avg t (comp)[ms]";
-    std::cout.width(col_width);
-    std::cout << std::left << "Avg t (decomp)[ms]";
-    std::cout << std::endl;
-    // Results
-    std::cout.width(col_width-5);
-    std::cout << std::left << results.at(i).compression_ratio;
-    std::cout.width(col_width);
-    std::cout << std::left << results.at(i).avg_time_compression*1000;
-    std::cout.width(col_width);
-    std::cout << std::left << results.at(i).avg_time_decompression*1000;
-    std::cout << std::endl;
-    // Blank line, for readability
-    std::cout << std::endl;
+    if(print_to_terminal == true)
+    {
+      // Heading
+      std::cout.width(col_width-5);
+      std::cout << std::left << "Comp. Ratio";
+      std::cout.width(col_width);
+      std::cout << std::left << "Avg t (comp)[ms]";
+      std::cout.width(col_width);
+      std::cout << std::left << "Avg t (decomp)[ms]";
+      std::cout << std::endl;
+      // Results
+      std::cout.width(col_width-5);
+      std::cout << std::left << results.at(i).compression_ratio;
+      std::cout.width(col_width);
+      std::cout << std::left << results.at(i).avg_time_compression*1000;
+      std::cout.width(col_width);
+      std::cout << std::left << results.at(i).avg_time_decompression*1000;
+      std::cout << std::endl;
+      // Blank line, for readability
+      std::cout << std::endl;
+    }
   }
 }
