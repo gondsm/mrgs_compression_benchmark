@@ -10,7 +10,8 @@
 
 % Initialize variables.
 %filename = '/home/santos/Desktop/mrgs_compression_benchmark/matlab/results.csv';
-filename = 'results.csv';
+%filename = 'results.csv';
+filename = 'intel_aces.csv';
 delimiter = ',';
 startRow = 2;
 
