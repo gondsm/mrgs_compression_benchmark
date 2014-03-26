@@ -77,6 +77,7 @@ int main() {
   int n_iter = 50;
   for(int i = 0; i < datasets.size(); i++) {
     result_vector.push_back(lz4Test(n_iter, datasets.at(i)));
+    result_vector.push_back(lz4TestSlow(n_iter, datasets.at(i)));
     result_vector.push_back(deflateTest(n_iter, datasets.at(i)));
     result_vector.push_back(deflateTestFast(n_iter, datasets.at(i)));
     result_vector.push_back(deflateTestSlow(n_iter, datasets.at(i)));
@@ -87,7 +88,7 @@ int main() {
   }
   
   // Write results
-  WriteResults(result_vector);
+  WriteResults(result_vector, std::string("matlab/results.csv"));
 
   /// Done!
   return 0;

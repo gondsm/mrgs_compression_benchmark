@@ -161,10 +161,10 @@ void FillInTimes(std::vector<double> compress_times,
   results->std_deviation_decompression = sqrt(((double)1/(double)decompress_times.size()) * aux);
 }
 
-void WriteResults(std::vector<Results>& results){
+void WriteResults(std::vector<Results>& results, std::string filename){
   // Declarations
   int col_width = 18;
-  std::ofstream results_file("matlab/results.csv");
+  std::ofstream results_file(filename.c_str());
   
   // Setup csv header:
   results_file << "technique_name,dataset_name,dataset_size,num_iterations,"

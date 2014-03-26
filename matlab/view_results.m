@@ -86,15 +86,12 @@ num_datasets = length(ranges)-1
 Y = [];
 dataset_name_array = {};
 for i = 1:num_datasets
-    fprintf('AQUI?')
     Y = cat(2, Y, ratio(ranges(i)+1:ranges(i+1))./average_compression_time_ms(ranges(i)+1:ranges(i+1)));
     dataset_name_array(end+1) = dataset_name(ranges(i+1));
 end
 
 % Create graph
 figure();
-%set(gca,'ZScale','log') WE NEED LOG SCALE ON Z AXIS FOR DATA TO BE
-%VIEWABLE!
-bar3(gca, [1:ranges(2)], Y)
+handles = bar3(gca, [1:ranges(2)], Y);
 title('Compression ratio achieved per millissecond of compression time');
 set(gca,'Xtick',[1:ranges(2)],'YTickLabel',technique_name([1:ranges(2)]), 'XTickLabel', dataset_name_array)
