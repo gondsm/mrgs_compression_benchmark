@@ -1,0 +1,1 @@
+The log data used to create these occupancy grids was obtained at http://kaspar.informatik.uni-freiburg.de/~slamEvaluation/datasets.php. They are distributed under the terms of the Creative Commons Attribution 1.0 license, which you can find here: http://creativecommons.org/licenses/by/1.0/.
