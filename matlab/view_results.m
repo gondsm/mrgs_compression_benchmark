@@ -136,3 +136,54 @@ end
 bar([1:length(names)],Y_quicklz)
 set(gca,'Xtick',[1:length(names)], 'XTickLabel', names)
 title('Compression ratio achieved per millissecond of compression time');
+
+%% Line plots
+tech_names = {'DEFLATE (zlib)', 'DEFLATE (zlib) Slow', 'DEFLATE (zlib) Fast', 'LZMA', 'LZMA Slow', 'LZMA Fast', 'LZ4', 'LZ4 HC', 'QuickLZ'};
+%dataset_lengths = [753078, 1280342, 49561658];
+markers = {'+','o','x','s','d','^','v','>','<','p','h'};
+colors = ['c', 'm', 'r', 'g', 'b', 'k'];
+colors = repmat(colors, 1, 2);
+
+% Calculate polynomials
+C = {};
+C2 = {};
+poly = {};
+X = linspace(1,3, 10000);
+for i = 1:length(tech_names)
+    C{i} = polyfit([1:3].', temporal_efficiency(strcmp(technique_name, tech_names{i})), 2);
+    C2{i} = polyfit([1:3].', ratio(strcmp(technique_name, tech_names{i})), 2);
+    poly{i} = polyval(C{i}, X);
+    poly2{i} = polyval(C2{i}, X);
+end
+
+% Plot results
+figure('Color', [1 1 1]);
+%subplot(2,1,1)
+hold all;
+for i = 1:length(tech_names)
+    h(i) = plot([1:3], temporal_efficiency(strcmp(technique_name, tech_names{i})), sprintf('%s%s',markers{i}, colors(i)), 'markers', 10, 'linewidth', 1);
+    h1(i) = plot(X, poly{i}, colors(i), 'linewidth', 2);
+end
+%legend(h, tech_names)
+set(gca, 'yscale', 'log') 
+%grid;
+set(gca,'Xtick',[1:length(names)], 'XTickLabel', names)
+%title('Temporal Efficiency');
+ylabel('Temporal Efficiency')
+xlabel('Dataset')
+%export_fig efficiency.eps -eps
+
+figure('Color', [1 1 1]);
+%subplot(2,1,2)
+hold all;
+for i = 1:length(tech_names)
+    h(i) = plot([1:3], ratio(strcmp(technique_name, tech_names{i})), sprintf('%s%s',markers{i}, colors(i)), 'markers', 10, 'linewidth', 1);
+    h1(i) = plot(X, poly2{i}, colors(i), 'linewidth', 2);
+end
+%grid;
+legend(h, tech_names, 'Location', 'NorthWest')
+set(gca,'Xtick',[1:length(names)], 'XTickLabel', names)
+ylabel('Compression ratio achieved');
+xlabel('Dataset')
+xlabel('Dataset')
+%export_fig ratio.eps -eps
