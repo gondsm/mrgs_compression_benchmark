@@ -10,6 +10,8 @@ This tool was designed to be extended. You can add any compression tool you'd li
 
 ### Motivation
 
+This work was done in the context of my M.Sc. project, which involves exploring the optimization of inter-robot communication during SLAM mission. In order to determine if compression was a viable solution, and which technique worked the best, I've created this tool.
+
 ### pull_dependencies.sh
 
 If you've just cloned this repository, I'd start by looking here. This shell script downloads and extracts all the tools I've tested myself using this tool.
@@ -19,5 +21,3 @@ If you've just cloned this repository, I'd start by looking here. This shell scr
 Running ```make``` on the project's root directory should build everything you need to run a simple test. If you want to add other tools, you'll have to add them to the makefile, so that everything gets linked together.
 
 To run the default test, which benchmarks LZ4 (http://code.google.com/p/lz4/), zlib (http://www.zlib.net/), LZMA (http://7-zip.org/) and QuickLZ (http://quicklz.com/), all you should have to do is run ```./test``` on your terminal.
-
-### Related work
