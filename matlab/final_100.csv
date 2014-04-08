@@ -1,3 +1,4 @@
+technique_name,dataset_name,dataset_size,num_iterations,ratio,average_compression_time_ms,std_compression_time_ms,average_decompression_time_ms,std_decompression_time_ms
 LZ4,pgm/intel.pgm,753025,100,11.7414,0.381372,0.019942,0.347206,0.0445168,
 LZ4 HC,pgm/intel.pgm,753025,100,22.8501,80.8173,1.27023,0.209071,0.0155623,
 DEFLATE (zlib),pgm/intel.pgm,753025,100,27.7265,13.8825,0.373894,1.38799,0.0835256,
