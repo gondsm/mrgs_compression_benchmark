@@ -45,14 +45,10 @@ int main() {
   std::vector<std::string> dataset_names;
   std::vector<Dataset> datasets;
   
-  // Add vectors (add your datasets here!)
-  //dataset_names.push_back(std::string("datasets/intel1000.txt"));
-  //dataset_names.push_back(std::string("datasets/intel.txt"));
-  //dataset_names.push_back(std::string("pgm/mapa1.pgm"));
-  //dataset_names.push_back(std::string("pgm/mapa2.pgm"));
-  //dataset_names.push_back(std::string("pgm/intel.pgm"));
-  //dataset_names.push_back(std::string("pgm/aces.pgm"));
-  //dataset_names.push_back(std::string("pgm/killian.pgm"));
+  // Add dataset names (add your datasets here!)
+  dataset_names.push_back(std::string("pgm/intel.pgm"));
+  dataset_names.push_back(std::string("pgm/aces.pgm"));
+  dataset_names.push_back(std::string("pgm/killian.pgm"));
   dataset_names.push_back(std::string("pgm/csail.pgm"));
   dataset_names.push_back(std::string("pgm/killian010.pgm"));
   
@@ -106,7 +102,7 @@ int main() {
   }
   
   // Write results
-  WriteResults(result_vector, std::string("matlab/killian010_csail_100.csv"), false);
+  WriteResults(result_vector, std::string("matlab/all_100.csv"), false);
 
   /// Done!
   return 0;
