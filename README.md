@@ -14,7 +14,7 @@ This work was done in the context of my M.Sc. project, which involves exploring 
 
 ### pull_dependencies.sh
 
-If you've just cloned this repository, I'd start by looking here. This shell script downloads and extracts all the tools I've tested myself using this tool.
+If you've just cloned this repository, I'd start by looking here. This shell script downloads and extracts all the implementations I've tested myself using this tool.
 
 ### Building and running the tool
 
