@@ -21,3 +21,6 @@ If you've just cloned this repository, I'd start by looking here. This shell scr
 Running ```make``` on the project's root directory should build everything you need to run a simple test. If you want to add other tools, you'll have to add them to the makefile, so that everything gets linked together.
 
 To run the default test, which benchmarks LZ4 (http://code.google.com/p/lz4/), zlib (http://www.zlib.net/), LZMA (http://7-zip.org/) and QuickLZ (http://quicklz.com/), all you should have to do is run ```./test``` on your terminal.
+
+### Extending the tool
+The addition of a new technique to the benchmark is possible simply by wrapping the function in a wrapper, of which several examples are provided, and by adding calls to the new wrapper to the main test function.
