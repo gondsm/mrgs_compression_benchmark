@@ -209,7 +209,7 @@ void WriteResults(std::vector<Results>& results, std::string filename, bool prin
                  << results.at(i).avg_time_compression*1000 << ","
                  << results.at(i).std_deviation_compression*1000 << ","
                  << results.at(i).avg_time_decompression*1000 << ","
-                 << results.at(i).std_deviation_decompression*1000 << ","
+                 << results.at(i).std_deviation_decompression*1000
                  << std::endl;
     
     if(print_to_terminal == true)
