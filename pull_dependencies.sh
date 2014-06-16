@@ -25,3 +25,10 @@ mkdir quicklz
 cd quicklz
 wget http://www.quicklz.com/quicklz.h
 wget http://www.quicklz.com/quicklz.c
+
+# Pull Snappy
+git clone https://www.github.com/google/snappy
+cd snappy
+./configure
+make
+cd ..
