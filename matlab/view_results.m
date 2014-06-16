@@ -1,4 +1,4 @@
-%% This code was authored by Gonçalo S. Martins, and is hereby put in public domain.
+%% This code was authored by Gonçalo S. Martins, and is hereby released into public domain.
 
 %% Import data from text file.
 clear all
@@ -74,10 +74,10 @@ end
 set(gca, 'yscale', 'log') 
 set(gca, 'xscale', 'log')
 axis([dataset_sizes(1)-100000 dataset_sizes(end) 10e-3 150])
-ylabel('Temporal Efficiency')
+ylabel('Temporal Efficiency (E)')
 xlabel('Dataset Size (Bytes)')
 legend(h, technique_name_diff, 'Location', 'NorthEast')
-export_fig efficiency.eps -eps
+%export_fig efficiency.eps -eps
 
 figure('Color', [1 1 1], 'Position', [155 41 512 620]);
 hold all;
@@ -87,10 +87,10 @@ for i = 1:length(technique_name_diff)
 end
 set(gca, 'xscale', 'log')
 axis([dataset_sizes(1)-100000 dataset_sizes(end) 0 200])
-ylabel('Ratio')
+ylabel('Ratio (R)')
 xlabel('Dataset Size (Bytes)')
 legend(h, technique_name_diff, 'Location', 'NorthWest')
-export_fig ratio.eps -eps
+%export_fig ratio.eps -eps
 
 %% Mean Bars
 clear avg_E avg_R
