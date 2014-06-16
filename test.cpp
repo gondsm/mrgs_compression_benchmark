@@ -48,7 +48,7 @@ int main() {
   // Add dataset names (add your datasets here!)
   dataset_names.push_back(std::string("pgm/intel.pgm"));
   dataset_names.push_back(std::string("pgm/aces.pgm"));
-  dataset_names.push_back(std::string("pgm/killian.pgm"));
+  dataset_names.push_back(std::string("pgm/killian005.pgm"));
   dataset_names.push_back(std::string("pgm/csail.pgm"));
   dataset_names.push_back(std::string("pgm/killian010.pgm"));
   
@@ -98,11 +98,14 @@ int main() {
     std::cout << "Done!" << std::endl;
     std::cout << "Testing QuickLZ..." << std::flush;
     result_vector.push_back(quicklzTest(n_iter, datasets.at(i)));
+    std::cout << "Done!" << std::endl;
+    std::cout << "Testing Snappy..." << std::flush;
+    result_vector.push_back(snappyTest(n_iter, datasets.at(i)));
     std::cout << "Done!" << std::endl << std::endl;
   }
   
   // Write results
-  WriteResults(result_vector, std::string("matlab/all_100.csv"), false);
+  WriteResults(result_vector, std::string("matlab/all_100.csv"), true);
 
   /// Done!
   return 0;
