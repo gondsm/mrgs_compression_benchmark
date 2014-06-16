@@ -10,7 +10,7 @@ This tool was designed to be extended. You can add any compression tool you'd li
 
 ### Motivation
 
-This work was done in the context of my M.Sc. project, which involves exploring the optimization of inter-robot communication during SLAM mission. In order to determine if compression was a viable solution, and which technique worked the best, I've created this tool.
+This work was done in the context of my M.Sc. project, which involves exploring the optimization of inter-robot communication during a SLAM mission. In order to determine if compression was a viable solution, and which technique worked the best, I've created this tool.
 
 ### pull_dependencies.sh
 
