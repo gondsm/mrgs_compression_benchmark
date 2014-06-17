@@ -104,12 +104,23 @@ plot.ylabel('Temporal Efficiency (E)', fontsize='small')
 plot.savefig('efficiency.pdf', dpi=1000, bbox_inches='tight')
 plot.close(fig_eff)
 
+# Efficiency vs Ratio
+#fig_vs = plot.figure()
+#plot.hold(True)
+#for i in range(len(efficiency)):
+#    plot.plot(mean_ratio[i]/max(mean_ratio), mean_efficiency[i]/max(mean_efficiency), markers[i%len(markers)], markersize = 10)
+#plot.ylabel('Normalized Mean Temporal Efficiency (E)')
+#plot.xlabel('Normalized Mean Compression Ratio')
+#plot.legend(technique_names)
+#plot.show()
+
 # Mean ratio for 3 smaller datasets
 fig_mean_ratio = plot.figure()
 h = plot.bar(range(10),mean_ratio)
 xticks_pos = [0.65*patch.get_width() + patch.get_xy()[0] for patch in h]
 plot.xticks(xticks_pos, technique_names, rotation = 30, ha = 'right', fontsize='x-large')
 plot.grid(axis = 'y')
+plot.autoscale(True, axis='x', tight='True')
 plot.gca().set_axisbelow(True) # So that bars are on top of grid
 plot.ylabel(r'Mean Compression Ratio', fontsize='x-large')
 plot.savefig('mean_ratio.pdf', dpi=1000, bbox_inches='tight')
@@ -121,6 +132,7 @@ h = plot.bar(range(10),mean_efficiency)
 xticks_pos = [0.65*patch.get_width() + patch.get_xy()[0] for patch in h]
 plot.xticks(xticks_pos, technique_names, rotation = 30, ha = 'right', fontsize='x-large')
 plot.grid(axis = 'y')
+plot.autoscale(True, axis='x', tight='True')
 plot.gca().set_axisbelow(True) # So that bars are on top of grid
 plot.ylabel(r'Mean Temporal Efficiency', fontsize='x-large')
 plot.savefig('mean_efficiency.pdf', dpi=1000, bbox_inches='tight')
