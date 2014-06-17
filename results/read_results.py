@@ -57,7 +57,7 @@ for i in range(0, len(technique_names)):
 # Temporal efficiency
 efficiency = []
 for i in range(0, len(technique_names)):
-    efficiency.append([float(row[4])/(float(row[5])+float(row[6])) for row in sorted_rows[i*num_datasets:(i+1)*num_datasets]])
+    efficiency.append([float(row[4])/(float(row[5])+float(row[7])) for row in sorted_rows[i*num_datasets:(i+1)*num_datasets]])
 
 # Mean ratio for smaller datasets
 mean_ratio = []
@@ -69,7 +69,7 @@ for i in range(0, len(technique_names)):
 # Mean temporal efficiency for smaller datasets
 mean_efficiency = []
 for i in range(0, len(technique_names)):
-    local_efficiency = [float(row[4])/(float(row[5])+float(row[6])) for row in sorted_rows[i*num_datasets: i*num_datasets+num_smaller_datasets]]  
+    local_efficiency = [float(row[4])/(float(row[5])+float(row[7])) for row in sorted_rows[i*num_datasets: i*num_datasets+num_smaller_datasets]]  
     mean_efficiency.append(sum(local_efficiency)/len(local_efficiency))
 
 # Plot Stuff
