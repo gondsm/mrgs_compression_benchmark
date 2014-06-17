@@ -82,6 +82,7 @@ for i in range(0, len(ratio)):
     plot.plot(dataset_sizes, ratio[i], ''.join(['--', markers[i%len(markers)]]))
 plot.legend(technique_names, loc='upper center', fontsize='small', labelspacing=0.1, ncol=2, fancybox=True, bbox_to_anchor=(0.5, 1.07))
 plot.gca().set_xscale('log')
+plot.grid(True, alpha=0.2, which='both')
 plot.autoscale(True, axis='x', tight='True')
 plot.tick_params(labelsize='small')
 plot.xlabel('Dataset Size (Bytes)', fontsize='small')
@@ -97,6 +98,7 @@ for i in range(0, len(efficiency)):
 plot.legend(technique_names, loc='upper center', fontsize='small', labelspacing=0.1, ncol=2, fancybox=True, bbox_to_anchor=(0.5, 1.07))
 plot.gca().set_yscale('log')
 plot.gca().set_xscale('log')
+plot.grid(True, alpha=0.2, which='both')
 plot.autoscale(True, axis='x', tight='True')
 plot.tick_params(labelsize='small')
 plot.xlabel('Dataset Size (Bytes)', fontsize='small')
@@ -119,7 +121,7 @@ fig_mean_ratio = plot.figure()
 h = plot.bar(range(10),mean_ratio)
 xticks_pos = [0.65*patch.get_width() + patch.get_xy()[0] for patch in h]
 plot.xticks(xticks_pos, technique_names, rotation = 30, ha = 'right', fontsize='x-large')
-plot.grid(axis = 'y')
+plot.grid(axis = 'y', alpha=0.3)
 plot.autoscale(True, axis='x', tight='True')
 plot.gca().set_axisbelow(True) # So that bars are on top of grid
 plot.ylabel(r'Mean Compression Ratio', fontsize='x-large')
@@ -131,7 +133,7 @@ fig_mean_efficiency = plot.figure()
 h = plot.bar(range(10),mean_efficiency)
 xticks_pos = [0.65*patch.get_width() + patch.get_xy()[0] for patch in h]
 plot.xticks(xticks_pos, technique_names, rotation = 30, ha = 'right', fontsize='x-large')
-plot.grid(axis = 'y')
+plot.grid(axis = 'y', alpha=0.3)
 plot.autoscale(True, axis='x', tight='True')
 plot.gca().set_axisbelow(True) # So that bars are on top of grid
 plot.ylabel(r'Mean Temporal Efficiency', fontsize='x-large')
