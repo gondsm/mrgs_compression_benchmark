@@ -105,7 +105,7 @@ int main() {
   }
   
   // Write results
-  WriteResults(result_vector, std::string("matlab/all_100.csv"), true);
+  WriteResults(result_vector, std::string("results/all_100.csv"), true);
 
   /// Done!
   return 0;
