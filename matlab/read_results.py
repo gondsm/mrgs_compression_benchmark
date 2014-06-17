@@ -5,7 +5,8 @@ Created on Mon Jun 16 18:39:52 2014
 @author: Gonçalo Martins
 """
 
-import __future__
+from __future__ import print_function
+from __future__ import division
 import matplotlib
 import csv
 
@@ -22,5 +23,22 @@ with open('all_100.csv', 'r') as results :
             first_row = 0
         else:
             rows.append(row)
-for row in rows:
+
+# Sort lines by technique name and dataset size:
+sorted_rows = sorted(rows, key=lambda row: (row[0], int(row[2])))
+
+# Write sorted rows to file, for checking
+#with open('test.csv', 'w') as testfile:
+#    for row in sorted_rows:
+#        testfile.write(','.join(row))
+#        testfile.write('\n')
+
+# Find out how many datasets were used:
+# (I'm assuming the same datasets were used for all techniques)
+num_datasets = 0
+for row in sorted_rows:
+    if row[0] == sorted_rows[0][0]:
+        num_datasets+=1
+    else:
+        break
     
